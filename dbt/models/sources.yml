@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    database: IOT_DB
+    schema: RAW
+    tables:
+      - name: sensor_data

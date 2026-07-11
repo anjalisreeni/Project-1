@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+*.env
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+Data/*.csv
+!Data/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
