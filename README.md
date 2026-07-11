@@ -112,22 +112,7 @@ Apache Superset Dashboard
 
 ---
 
-## Repository Structure
 
-```
-Project-1/
-│
-├── Data/
-├── Simulator/
-│   ├── iot_simulator.py
-│   └── realtime_generator.py
-├── Producer/
-├── Consumer/
-├── Snowflake/
-├── dbt/
-├── Dashboard/
-├── Notebook/
-└── README.md
 ```
 
 ---
