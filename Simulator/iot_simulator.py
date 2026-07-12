@@ -8,7 +8,7 @@ import time
 from datetime import datetime, timezone
 
 SENSOR_IDS = [f"sensor_{i:03d}" for i in range(1, 11)]
-OUTPUT_CSV = "../Data/sensor_data.csv"
+OUTPUT_CSV = "Data/sensor_data.csv"
 
 
 def generate_reading(sensor_id: str) -> dict:
