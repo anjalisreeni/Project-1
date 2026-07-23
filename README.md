@@ -1,85 +1,48 @@
 
-# Project 1 - AtmoSync: Micro-Climate Arbitrage Analytics
+# 🌡️ ATMOSYNC – IoT Cold Chain Monitoring Dashboard
 
-## Problem Statement
+## 📌 Project Overview
 
-Traditional supply chain analytics rely on standard transit times and macro-weather forecasts. They fail to monitor real-time, hyper-local micro-climate changes (such as sudden temperature or humidity variations inside refrigerated shipping containers), leading to spoilage of agricultural commodities before they reach the market.
+ATMOSYNC is an IoT-powered Cold Chain Monitoring project that simulates real-time sensor data from refrigerated containers and visualizes key operational insights through an interactive Power BI dashboard.
 
-## Use Case
-
-A commodities trader uses the **AtmoSync Dashboard** to monitor refrigerated shipments in real time.
-
-The streaming pipeline continuously analyzes IoT sensor data from each container. If a container's environmental conditions deviate from the safe range, the system detects the increased spoilage risk and alerts the trader. This enables shipment rerouting to a nearby secondary market, reducing losses and maximizing profit.
-
-## Project Architecture
-
-```
-IoT Simulator
-      │
-      ▼
-Real-Time Data Generator
-      │
-      ▼
-Apache Kafka
-      │
-      ▼
-Snowflake
-      │
-      ▼
-dbt
-      │
-      ▼
-Apache Superset Dashboard
-```
+The project demonstrates how IoT telemetry can be transformed into actionable business insights, enabling supply chain managers to monitor shipment conditions, ensure product quality, and improve operational efficiency.
 
 ---
 
-## Key Modules
+## 🚀 Key Features
 
-### Streaming Ingestion (Apache Kafka)
-- Generate simulated IoT sensor data
-- Stream container telemetry in real time
-
-### Cloud Data Warehouse (Snowflake)
-- Store raw IoT streams
-- Store historical shipment data
-
-### Data Transformation (dbt)
-- Clean raw streaming data
-- Build analytical models
-- Calculate spoilage metrics and business insights
-
-### Visualization (Apache Superset)
-- Live container monitoring
-- Shipment health dashboard
-- Risk alerts
-- Operational analytics
+- 📦 Monitor Total Containers and Shipments
+- 🌡️ Track Average Temperature
+- 💧 Monitor Average Humidity
+- 🔋 Monitor Average Battery Level
+- 📡 Analyze Real-time Sensor Readings
+- 📈 Temperature Trend Analysis
+- 🍩 Container Status Distribution
+- 🌳 Container Distribution by Fruit Type
+- 📊 Top 5 Fruits by Average Temperature
+- 📝 Operational Insights Panel
+- 🎛️ Interactive Slicers for Data Exploration
 
 ---
 
-## Current Progress
+# 🔄 IoT Sensor Data Simulator
 
-### Completed
+A Python-based IoT simulator was developed to mimic real-world cold chain monitoring by generating continuous sensor readings for refrigerated containers.
 
-- Historical IoT dataset generator (`iot_simulator.py`)
-- Real-time IoT data generator (`realtime_generator.py`)
-- Generated dataset with 10,000 sensor records
-- Risk Score calculation
-- Alert Status generation
-- Live timestamp updates
-- Sensor value simulation
+### Simulator Workflow
 
-### In Progress
+- Reads container records from the dataset.
+- Generates real-time sensor readings at fixed intervals.
+- Automatically updates timestamps for every reading.
+- Simulates realistic fluctuations in:
+  - Temperature
+  - Humidity
+  - Battery Level
+  - Vibration
+- Preserves shipment and container information throughout the simulation.
+- Produces a continuous stream of telemetry data for monitoring and analytics.
 
-- Kafka Producer
-- Kafka Consumer
-- Snowflake Integration
-- dbt Models
-- Apache Superset Dashboard
-
----
-
-## Dataset Features
+### Simulated Sensor Attributes
 
 - Container ID
 - Shipment ID
@@ -91,32 +54,118 @@ Apache Superset Dashboard
 - Vibration
 - Battery Level
 - Door Status
-- Container Status
 - Latitude
 - Longitude
 - Timestamp
-- Risk Score *(Generated in Real-Time)*
-- Alert Status *(Generated in Real-Time)*
+
+### Purpose
+
+The simulator recreates an IoT-enabled cold chain environment, allowing real-time monitoring and dashboard development without requiring physical IoT devices.
 
 ---
 
-## Technologies Used
+# 📊 Dashboard Highlights
+
+### Executive KPIs
+
+- Total Containers
+- Total Shipments
+- Average Temperature
+- Average Humidity
+- Average Battery Level
+- Total Sensor Readings
+
+### Visualizations
+
+- Temperature Trend Analysis
+- Container Status Distribution
+- Container Distribution by Fruit Type (Treemap)
+- Top 5 Fruits by Average Temperature (Matrix)
+- Operational Insights
+- Interactive Filters
+
+---
+
+# 💡 Business Insights
+
+- Identifies the current distribution of refrigerated containers across operational stages.
+- Tracks temperature trends to ensure cold chain compliance.
+- Monitors battery health of IoT devices for uninterrupted sensor operation.
+- Highlights fruit categories requiring closer environmental monitoring.
+- Provides operational insights for proactive decision-making.
+
+---
+
+# 🛠️ Technologies Used
 
 - Python
+- Power BI
+- DAX
+- Power Query
 - Pandas
-- Apache Kafka
-- Snowflake
-- dbt
-- Apache Superset
-- Git & GitHub
+- NumPy
 
 ---
 
+# 📂 Project Structure
 
+```
+ATMOSYNC/
+│
+├── Dashboard/
+│   └── ATMOSYNC.pbix
+│
+├── Simulator/
+│   ├── realtime_simulator.py
+│   └── sensor_data.csv
+│
+├── Images/
+│   └── dashboard.png
+│
+└── README.md
 ```
 
 ---
 
-## Objective
+# 🔄 Project Workflow
 
-Develop a scalable, real-time cold-chain monitoring system capable of streaming IoT sensor data, analyzing spoilage risks, and supporting data-driven logistics decisions through an end-to-end ELT pipeline.
+```
+Sensor Dataset
+      │
+      ▼
+Python IoT Simulator
+      │
+      ▼
+Real-time Sensor Data Generation
+      │
+      ▼
+Power BI Dashboard
+      │
+      ▼
+Cold Chain Monitoring & Operational Insights
+```
+
+---
+
+# 📸 Dashboard Preview
+
+![alt text](image.png)
+
+```markdown
+![ATMOSYNC Dashboard](Images/dashboard.png)
+```
+
+---
+
+# 🎯 Project Objective
+
+To simulate an IoT-enabled cold chain monitoring system and develop an interactive dashboard that helps monitor environmental conditions, shipment health, and operational performance through real-time sensor data visualization.
+
+---
+
+# 👩‍💻 Author
+
+**Sayam Stuti**
+
+- GitHub: https://github.com/sayamstuti
+- LinkedIn: www.linkedin.com/in/sayam-stuti-shuvadarsini
