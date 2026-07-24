@@ -107,23 +107,7 @@ The simulator recreates an IoT-enabled cold chain environment, allowing real-tim
 
 ---
 
-# 📂 Project Structure
 
-```
-ATMOSYNC/
-│
-├── Dashboard/
-│   └── ATMOSYNC.pbix
-│
-├── Simulator/
-│   ├── realtime_simulator.py
-│   └── sensor_data.csv
-│
-├── Images/
-│   └── dashboard.png
-│
-└── README.md
-```
 
 ---
 
@@ -147,13 +131,6 @@ Cold Chain Monitoring & Operational Insights
 
 ---
 
-# 📸 Dashboard Preview
-
-![alt text](image.png)
-
-```markdown
-![ATMOSYNC Dashboard](Images/dashboard.png)
-```
 
 ---
 
