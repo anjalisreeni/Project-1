@@ -1,148 +1,276 @@
 
-# 🌡️ ATMOSYNC – IoT Cold Chain Monitoring Dashboard
+# 🌦️ AtmoSync – Micro-Climate Arbitrage Analytics
 
-## 📌 Project Overview
-
-ATMOSYNC is an IoT-powered Cold Chain Monitoring project that simulates real-time sensor data from refrigerated containers and visualizes key operational insights through an interactive Power BI dashboard.
-
-The project demonstrates how IoT telemetry can be transformed into actionable business insights, enabling supply chain managers to monitor shipment conditions, ensure product quality, and improve operational efficiency.
+> A real-time supply chain analytics platform that monitors refrigerated agricultural shipments using IoT sensor data, enabling early spoilage detection and smarter logistics decisions.
 
 ---
 
-## 🚀 Key Features
+# 👨‍💻 My Contributions
 
-- 📦 Monitor Total Containers and Shipments
-- 🌡️ Track Average Temperature
-- 💧 Monitor Average Humidity
-- 🔋 Monitor Average Battery Level
-- 📡 Analyze Real-time Sensor Readings
-- 📈 Temperature Trend Analysis
-- 🍩 Container Status Distribution
-- 🌳 Container Distribution by Fruit Type
-- 📊 Top 5 Fruits by Average Temperature
-- 📝 Operational Insights Panel
-- 🎛️ Interactive Slicers for Data Exploration
+This branch contains my individual contributions to the AtmoSync project.
+
+## ✅ 1. Repository Structure
+
+- Created the initial repository structure
+- Organized folders for:
+  - Data
+  - Notebooks
+  - Docs
+  - Images
+  - Simulator
+  - Snowflake
+  - Dashboard
+  - Documentation
+  - Notebook
+  - README
+  - requirement.txt
 
 ---
 
-# 🔄 IoT Sensor Data Simulator
+# 📡 2. Python IoT Sensor Simulator
 
-A Python-based IoT simulator was developed to mimic real-world cold chain monitoring by generating continuous sensor readings for refrigerated containers.
+Designed and developed a Python-based IoT simulator that generates realistic refrigerated container sensor data.
 
-### Simulator Workflow
+### Dataset Statistics
 
-- Reads container records from the dataset.
-- Generates real-time sensor readings at fixed intervals.
-- Automatically updates timestamps for every reading.
-- Simulates realistic fluctuations in:
-  - Temperature
-  - Humidity
-  - Battery Level
-  - Vibration
-- Preserves shipment and container information throughout the simulation.
-- Produces a continuous stream of telemetry data for monitoring and analytics.
+- **10,000 Sensor Records**
+- **100 Containers**
+- **1000 Shipments**
+- **10 Fruit Types**
+- **8 Indian Cities**
 
-### Simulated Sensor Attributes
+### Generated Features
+
+### Shipment Information
 
 - Container ID
 - Shipment ID
 - Fruit Type
 - Origin
 - Destination
+
+### Environmental Sensors
+
 - Temperature
 - Humidity
 - Vibration
+
+### Device Health
+
 - Battery Level
 - Door Status
-- Latitude
-- Longitude
-- Timestamp
 
-### Purpose
+### Logistics
 
-The simulator recreates an IoT-enabled cold chain environment, allowing real-time monitoring and dashboard development without requiring physical IoT devices.
+- Container Status
+- GPS Coordinates
+- Historical Timestamp
+
+The simulator mimics real refrigerated container telemetry for analytics and dashboard development.
 
 ---
 
-# 📊 Dashboard Highlights
+# 📊 3. Exploratory Data Analysis (EDA)
 
-### Executive KPIs
+Performed comprehensive exploratory analysis on the generated IoT dataset.
 
-- Total Containers
+### Analysis Performed
+
+- Humidity Distribution
+- Fruit Distribution
+- Door Status Analysis
+- Shipment Origin Distribution
+- Correlation Heatmap
+- Average Temperature by Fruit Type
+
+These analyses helped identify shipment patterns and validate generated sensor data.
+
+---
+
+# ⚙️ 4. Feature Engineering
+
+Created additional business-oriented features to improve analytics.
+
+### Engineered Features
+
+- Risk Level
+- Battery Status
+- Temperature Status
+- Shipment Route
+- Timestamp Features
+  - Hour
+  - Day
+  - Month
+  - Weekday
+
+The transformed dataset was exported as:
+
+```
+sensor_data_feature_engineered.csv
+```
+
+---
+
+# 🗄️ 5. SQL Analytics
+
+Designed SQL queries to extract operational insights.
+
+### Queries Implemented
+
 - Total Shipments
+- Total Containers
 - Average Temperature
 - Average Humidity
-- Average Battery Level
-- Total Sensor Readings
+- Average Battery
+- Shipment Status Distribution
+- Fruit-wise Shipments
+- Average Temperature by Fruit
+- Highest Temperature Containers
+- High Risk Containers
+- Battery Status Distribution
+- Average Temperature by Route
+- Origin-wise Shipments
+- Destination-wise Shipments
+- Hourly Sensor Readings
+- Low Battery Containers
+- Temperature Status Distribution
 
-### Visualizations
+---
 
-- Temperature Trend Analysis
+# 📈 6. Power BI Dashboard
+
+Designed an interactive two-page dashboard to monitor container health and shipment performance.
+
+---
+
+## 📄 Page 1 – Operational Monitoring
+
+Features
+
+- KPI Cards
+  - Total Containers
+  - Total Shipments
+  - Average Temperature
+  - Average Humidity
+  - Average Battery
+  - Sensor Readings
+
+- Temperature Trend
+
+- Container Distribution by Fruit
+
 - Container Status Distribution
-- Container Distribution by Fruit Type (Treemap)
-- Top 5 Fruits by Average Temperature (Matrix)
+
+- Top Fruits by Average Temperature
+
+- Operational Insights Panel
+
+
+---
+
+## 📄 Page 2 – Historical & Logistics Analysis
+
+Features
+
+- Shipment Distribution by Origin (Map)
+
+- Shipment Distribution by Destination
+
+- Container Status by Origin
+
+- Environmental Summary
+
 - Operational Insights
-- Interactive Filters
-
----
-
-# 💡 Business Insights
-
-- Identifies the current distribution of refrigerated containers across operational stages.
-- Tracks temperature trends to ensure cold chain compliance.
-- Monitors battery health of IoT devices for uninterrupted sensor operation.
-- Highlights fruit categories requiring closer environmental monitoring.
-- Provides operational insights for proactive decision-making.
-
----
-
-# 🛠️ Technologies Used
-
-- Python
-- Power BI
-- DAX
-- Power Query
-- Pandas
-- NumPy
-
----
-
 
 
 ---
 
-# 🔄 Project Workflow
+# 📁 Project Structure
 
 ```
-Sensor Dataset
-      │
-      ▼
-Python IoT Simulator
-      │
-      ▼
-Real-time Sensor Data Generation
-      │
-      ▼
-Power BI Dashboard
-      │
-      ▼
-Cold Chain Monitoring & Operational Insights
+## 📂 Project Structure
+
+```text
+## 📂 Project Structure
+
+```text
+AtmoSync/
+│
+├── Dashboard/
+│   └── dashboard.pbix
+│
+├── Data/
+│   ├── sensor_data.csv
+│   └── sensor_data_feature_engineered.csv
+│
+├── Docs/
+│   ├── project_overview.md
+│   ├── data_dictionary.md
+│   ├── feature_engineering.md
+│   └── dashboard_guide.md
+│
+├── Images/
+│   ├── page_1_dashboard.jpg
+│   └── page_2_dashboard.jpg
+│
+├── Notebooks/
+│   ├── EDA_IoT_simulator.ipynb
+│   └── Feature_Engineering.ipynb
+│
+├── Presentation/
+│   └── AtmoSync_Project_Presentation.pdf
+│
+├── Simulator/
+│   ├── __init__.py
+│   ├── iot_simulator.py
+│   └── realtime_simulator.py
+│
+├── SQL/
+│   └── queries_dashboard.sql
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
+
+```
 ```
 
 ---
 
+# 📊 Key Features
+
+- Realistic IoT Sensor Data Generation
+- Refrigerated Container Monitoring
+- Environmental Analytics
+- Shipment Route Analysis
+- Risk Detection
+- SQL Business Analytics
+- Interactive Power BI Dashboard
+- Supply Chain Insights
 
 ---
 
-# 🎯 Project Objective
+# 🎯 Future Scope
 
-To simulate an IoT-enabled cold chain monitoring system and develop an interactive dashboard that helps monitor environmental conditions, shipment health, and operational performance through real-time sensor data visualization.
+- Live Kafka Streaming
+- Snowflake Integration
+- dbt Transformation Models
+- Apache Superset Live Dashboard
+- Predictive Spoilage Detection
+- Machine Learning Risk Prediction
+- Real-time Alert System
 
 ---
 
-# 👩‍💻 Author
+# 🙌 Acknowledgement
 
-**Sayam Stuti**
+This project was developed as part of the **Infotact AtmoSync** team project.
 
-- GitHub: https://github.com/sayamstuti
-- LinkedIn: www.linkedin.com/in/sayam-stuti-shuvadarsini
+The work presented in this branch represents **my individual contributions**, including:
+
+- Repository Structure
+- Python IoT Sensor Simulator
+- Exploratory Data Analysis
+- Feature Engineering
+- SQL Analytics
+- Two-page Power BI Dashboard
