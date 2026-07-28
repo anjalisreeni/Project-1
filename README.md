@@ -4,6 +4,20 @@
 > A real-time IoT-driven analytics platform that monitors shipping container conditions, predicts spoilage risk, and enables data-driven rerouting decisions using streaming data engineering and cloud analytics.
 
 ---
+## 📑 Table of Contents
+
+- [📌 Problem Statement](#-problem-statement)
+- [💡 Use Case](#-use-case)
+- [🚀 Project Architecture](#-project-architecture)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📂 Project Structure](#-project-structure)
+- [✨ Key Features](#-key-features)
+- [👥 Team Members & Contributions](#-team-members--contributions)
+- [📊 Dashboard Overview](#-dashboard-overview)
+- [🔄 Workflow](#-workflow)
+- [🎯 Expected Outcomes](#-expected-outcomes)
+- [🚀 Future Enhancements](#-future-enhancements)
+- [📄 License](#-license)
 
 ## 📌 Problem Statement
 
