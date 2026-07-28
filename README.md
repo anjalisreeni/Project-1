@@ -136,7 +136,7 @@ Project-1
 
 ## 👩 Sayam Stuti Shuvadarsini
 
-**Data Analytics & IoT Simulation**
+**Data Analytics, IoT Simulation & Dashboard Develpoment**
 
 - Developed the IoT Sensor Simulator
 - Generated mock environmental sensor data
@@ -164,12 +164,16 @@ Project-1
 
 ## 👩 Jiya Pendhari
 
-**Snowflake Integration**
+**Snowflake Integration & Live Data Pipeline**
 
-- Configured Snowflake database connection
-- Developed Snowflake data insertion module
-- Created Snowflake warehouse, schema, and table setup
-- Implemented centralized configuration for Snowflake connectivity
+### Responsibilities
+
+- Configured the Snowflake account and established secure Python connectivity.
+- Created the Snowflake warehouse, database, schema, and container sensor data table.
+- Developed Python modules for Snowflake connection and live data insertion.
+- Implemented automated sensor data generation and continuous insertion into Snowflake.
+- Centralized database connection settings using `config.py`.
+- Validated successful storage of real-time IoT sensor data in Snowflake.
 
 **Files**
 - `Simulator/snowflake_connection.py`
