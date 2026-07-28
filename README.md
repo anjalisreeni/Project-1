@@ -132,6 +132,20 @@ Project-1
 - Created project documentation
 - Organized the repository structure and project integration
 
+**Files**
+- `Simulator/iot_simulator.py`
+- `Notebooks/EDA_IoT_simulator.ipynb`
+- `Notebooks/Feature_Engineering.ipynb`
+- `Dashboard/dashboard.pbix`
+- `Data/sensor_data.csv`
+- `Data/sensor_data_feature_engineered.csv`
+- `Docs/dashboard_guide.md`
+- `Docs/data_dictionary.md`
+- `Docs/feature_engineering.md`
+- `Docs/project_overview.md`
+- `Images/page_1_dashboard.jpg`
+- `Images/page_2_dashboard.jpg`
+
 ---
 
 ## 👩 Jiya Pendhari
@@ -177,17 +191,29 @@ Project-1
 
 # 📊 Dashboard Overview
 
-The dashboard provides real-time insights into:
+# 📊 Dashboard Overview
 
-- Temperature Monitoring
-- Humidity Analysis
-- Pressure Monitoring
-- CO₂ Gas Levels
-- PM2.5 Monitoring
-- PM10 Monitoring
-- Container Health Status
-- Sensor Performance
-- Operational KPIs
+The Power BI dashboard provides a comprehensive view of container sensor data by monitoring environmental conditions and operational metrics.
+
+### Dashboard Features
+
+- 📌 Total Sensor Readings
+- 📌 Total Containers Monitored
+- 📌 Average Temperature
+- 📌 Average Humidity
+- 📌 Average Pressure
+- 📌 Average CO₂ Gas Concentration
+- 📌 Average PM2.5 Level
+- 📌 Average PM10 Level
+- 📈 Temperature Trend Over Time
+- 📊 Shipment Distribution by Fruit Type
+- 📦 Container Status Distribution
+- 🌡️ Temperature Distribution
+- 💧 Humidity Distribution
+- 📉 Sensor Data Trends
+- 🎛 Interactive Filters for Container ID, Date and Daytime
+
+The dashboard enables users to monitor container health, identify abnormal environmental conditions, analyze sensor trends, and make informed supply chain decisions using real-time insights.
 
 ---
 
