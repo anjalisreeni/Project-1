@@ -143,6 +143,24 @@ Designed an interactive two-page dashboard to monitor container health and shipm
 
 ---
 
+## 📊 7. Analytics Transformation (Snowflake)
+
+Developed the analytics layer to transform raw IoT sensor data into actionable business intelligence for cold-chain logistics.
+
+### Features
+
+- Created `ANALYTICS` schema in Snowflake
+- Built `CONTAINER_ANALYTICS` table to store enriched shipment metrics
+- Created `MARKET_PRICING` lookup table for dynamic market valuation
+- Calculated Spoilage Score using Temperature, Humidity, CO₂, PM2.5, and PM10
+- Classified containers into **Safe**, **Warning**, and **Critical** risk levels
+- Estimated Time to Spoilage based on environmental conditions
+- Predicted Estimated Financial Loss for each shipment
+- Calculated Arbitrage Profit using market pricing and predicted losses
+- Recommended the most profitable destination market
+- Generated logistics action recommendations for each container
+- Implemented the complete transformation pipeline using SQL CTEs and joins
+
 ## 📄 Page 1 – Operational Monitoring
 
 Features
@@ -274,3 +292,4 @@ The work presented in this branch represents **my individual contributions**, in
 - Feature Engineering
 - SQL Analytics
 - Two-page Power BI Dashboard
+- Analytics Transformation (Snowflake)
