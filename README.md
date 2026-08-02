@@ -357,3 +357,8 @@ The work presented in this branch represents **my individual contributions**, in
 - Real-Time Data Streaming
 - Three-Page Power BI Dashboard
 - Analytics Transformation 
+
+## Connect with Me
+
+- 💼 LinkedIn: www.linkedin.com/in/sayam-stuti-shuvadarsini
+- 💻 GitHub: https://github.com/sayamstuti
