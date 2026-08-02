@@ -21,6 +21,7 @@ This branch contains my individual contributions to the AtmoSync project.
   - Snowflake
   - Dashboard
   - Documentation
+  - Stream
   - Notebook
   - README
   - requirement.txt
@@ -187,31 +188,109 @@ Features
 
 ---
 
-## 📊 7. Analytics Transformation (Snowflake)
+## 📄 Page 3 – Live Risk & Business Analytics
 
-Developed the analytics layer to transform raw IoT sensor data into actionable business intelligence for cold-chain logistics.
+ KPI Cards
+
+- Average Risk Score
+- Estimated Financial Loss
+- Arbitrage Profit
+
+ Interactive Slicers
+
+- Fruit Type
+- Origin
+- Destination
+- Spoilage Risk
+
+Visualizations
+
+- Live Temperature Trend
+- Spoilage Risk Distribution
+- Recommended Market Distribution
+
+### Live Monitoring Table
+
+Displays real-time shipment information including:
+
+- Container ID
+- Fruit Type
+- Temperature
+- Humidity
+- Risk Score
+- Spoilage Risk
+- Recommended Action
+
+The dashboard updates with newly streamed sensor records after refreshing the report.
+
+---
+
+# 📊 7. Snowflake Data Pipeline & Analytics
+
+Developed a Snowflake-based data pipeline to transform raw IoT sensor data into business-ready analytics for refrigerated supply chain monitoring.
+
+## 📄 create_raw_table.sql
+
+Created the RAW data layer for ingesting live sensor data.
 
 ### Features
 
-- Created `ANALYTICS` schema in Snowflake
-- Built `CONTAINER_ANALYTICS` table to store enriched shipment metrics
-- Created `MARKET_PRICING` lookup table for dynamic market valuation
-- Calculated Spoilage Score using Temperature, Humidity, CO₂, PM2.5, and PM10
-- Classified containers into **Safe**, **Warning**, and **Critical** risk levels
-- Estimated Time to Spoilage based on environmental conditions
-- Predicted Estimated Financial Loss for each shipment
-- Calculated Arbitrage Profit using market pricing and predicted losses
-- Recommended the most profitable destination market
-- Generated logistics action recommendations for each container
-- Implemented the complete transformation pipeline using SQL CTEs and joins
+- Created `RAW` schema
+- Created `CONTAINER_SENSOR_DATA` table
+- Designed schema for:
+  - Shipment Information
+  - Environmental Sensor Data
+  - Device Health
+  - GPS Coordinates
+  - Timestamp
+  - Route Information
+- Used as the landing table for streamed IoT sensor records
+
+---
+
+## 📄 analytics_transformation.sql
+
+Developed the analytics layer to generate operational insights from raw sensor data.
+
+### Features
+
+- Created `ANALYTICS` schema
+- Created `CONTAINER_ANALYTICS` table
+- Loaded transformed data from the RAW layer
+- Calculated Risk Score using:
+  - Temperature
+  - Humidity
+  - Vibration
+  - Battery Level
+- Classified containers into:
+  - Safe
+  - Warning
+  - Critical
+- Estimated:
+  - Time to Spoilage
+  - Estimated Financial Loss
+  - Arbitrage Profit
+- Recommended:
+  - Best Destination Market
+  - Operational Action
+- Implemented an automated Snowflake Task (`UPDATE_ANALYTICS`) to continuously move newly streamed records from the RAW layer into the Analytics layer every minute
+- Added monitoring queries for task history, execution status and row count validation
+
+---
+
+# 🌐 8. Real-Time Snowflake Streaming
+
+Designed a real-time streaming pipeline using Python and Snowflake.
+
+### Features
+
+- Connected Python application with Snowflake
+- Streamed IoT sensor records into `RAW.CONTAINER_SENSOR_DATA`
+- Simulated continuous live sensor data using timed inserts
+- Automatically updated the Analytics layer using a scheduled Snowflake Task
+- Enabled near real-time analytics for Power BI dashboard refresh
 
 # 📁 Project Structure
-
-```
-## 📂 Project Structure
-
-```text
-## 📂 Project Structure
 
 ```text
 AtmoSync/
@@ -231,7 +310,8 @@ AtmoSync/
 │
 ├── Images/
 │   ├── page_1_dashboard.jpg
-│   └── page_2_dashboard.jpg
+│   ├── page_2_dashboard.jpg
+│   └── page_3_dashboard.jpg
 │
 ├── Notebooks/
 │   ├── EDA_IoT_simulator.ipynb
@@ -245,42 +325,22 @@ AtmoSync/
 │   ├── iot_simulator.py
 │   └── realtime_simulator.py
 │
+├── Stream/
+│   └── stream_to_snowflake.py
+│
 ├── SQL/
+│   ├── create_raw_table.sql
+│   ├── analytics_transformation.sql
 │   └── queries_dashboard.sql
 │
 ├── .gitignore
 ├── README.md
 └── requirements.txt
-
-```
 ```
 
 ---
 
-# 📊 Key Features
 
-- Realistic IoT Sensor Data Generation
-- Refrigerated Container Monitoring
-- Environmental Analytics
-- Shipment Route Analysis
-- Risk Detection
-- SQL Business Analytics
-- Interactive Power BI Dashboard
-- Supply Chain Insights
-
----
-
-# 🎯 Future Scope
-
-- Live Kafka Streaming
-- Snowflake Integration
-- dbt Transformation Models
-- Apache Superset Live Dashboard
-- Predictive Spoilage Detection
-- Machine Learning Risk Prediction
-- Real-time Alert System
-
----
 
 # 🙌 Acknowledgement
 
@@ -290,8 +350,10 @@ The work presented in this branch represents **my individual contributions**, in
 
 - Repository Structure
 - Python IoT Sensor Simulator
-- Exploratory Data Analysis
+- Exploratory Data Analysis (EDA)
 - Feature Engineering
-- SQL Analytics
-- Two-page Power BI Dashboard
-- Analytics Transformation (Snowflake)
+- SQL Business Analytics
+- Snowflake Data Pipeline
+- Real-Time Data Streaming
+- Three-Page Power BI Dashboard
+- Analytics Transformation 

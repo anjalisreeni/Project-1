@@ -1,7 +1,4 @@
--- =====================================================
--- Week 3 : Analytics Layer
--- Project : AtmoSync
--- =====================================================
+
 
 USE DATABASE ATMOSYNC_DB;
 
@@ -9,211 +6,264 @@ CREATE SCHEMA IF NOT EXISTS ANALYTICS;
 
 USE SCHEMA ANALYTICS;
 
-CREATE TABLE IF NOT EXISTS CONTAINER_ANALYTICS (
+CREATE OR REPLACE TABLE CONTAINER_ANALYTICS (
 
-    ID INTEGER,
-
-    TIMESTAMP TIMESTAMP,
+    CONTAINER_ID VARCHAR,
+    SHIPMENT_ID VARCHAR,
+    FRUIT_TYPE VARCHAR,
+    ORIGIN VARCHAR,
+    DESTINATION VARCHAR,
 
     TEMPERATURE FLOAT,
-
     HUMIDITY FLOAT,
+    VIBRATION FLOAT,
+    BATTERY_LEVEL NUMBER,
 
-    PRESSURE FLOAT,
-
-    CO2_GAS INTEGER,
-
-    PM2_5 FLOAT,
-
-    PM10 FLOAT,
-
-    DAYTIME STRING,
-
-    SPOILAGE_SCORE NUMBER(5,2),
-
-    SPOILAGE_RISK STRING,
-
+    RISK_SCORE NUMBER(5,2),
+    SPOILAGE_RISK VARCHAR,
     TIME_TO_SPOILAGE NUMBER(5,2),
 
     ESTIMATED_LOSS NUMBER(10,2),
-
+    RECOMMENDED_MARKET VARCHAR,
     ARBITRAGE_PROFIT NUMBER(10,2),
 
-    RECOMMENDED_MARKET STRING,
+    RECOMMENDED_ACTION VARCHAR,
 
-    RECOMMENDED_ACTION STRING
-
-);
--- Create Market Pricing Table
-CREATE TABLE IF NOT EXISTS MARKET_PRICING (
-
-    MARKET_NAME STRING,
-
-    MARKET_VALUE NUMBER(10,2)
-
+    TIMESTAMP TIMESTAMP_NTZ
 );
 
--- Insert Market Prices
-INSERT INTO MARKET_PRICING
-VALUES
-('Primary Export Market',5000),
-('Regional Distribution Center',4500),
-('Nearest Local Market',3800);
-
--- Check the data
-SELECT * FROM MARKET_PRICING;
-
-
-TRUNCATE TABLE CONTAINER_ANALYTICS;
-
-INSERT INTO CONTAINER_ANALYTICS
-
-WITH SENSOR_ANALYTICS AS (
-
-    SELECT
-        ID,
-        TIMESTAMP,
-        TEMPERATURE,
-        HUMIDITY,
-        PRESSURE,
-        CO2_GAS,
-        PM2_5,
-        PM10,
-        DAYTIME,
-
-        (
-    CASE
-        WHEN TEMPERATURE <= 5 THEN 5
-        WHEN TEMPERATURE <= 8 THEN 15
-        WHEN TEMPERATURE <= 12 THEN 30
-        ELSE 40
-    END +
-
-    CASE
-        WHEN HUMIDITY <= 60 THEN 5
-        WHEN HUMIDITY <= 75 THEN 15
-        ELSE 30
-    END +
-
-    CASE
-        WHEN CO2_GAS <= 400 THEN 5
-        WHEN CO2_GAS <= 600 THEN 10
-        ELSE 15
-    END +
-
-    CASE
-        WHEN PM2_5 <= 20 THEN 5
-        ELSE 10
-    END +
-
-    CASE
-        WHEN PM10 <= 30 THEN 5
-        ELSE 10
-    END
-
-) AS SPOILAGE_SCORE
-
-    FROM RAW.CONTAINER_SENSOR_DATA
-
-),
---------------------------------------------------
---  Determine Market Name first
---------------------------------------------------
-FINAL_ANALYTICS AS (
+INSERT INTO ANALYTICS.CONTAINER_ANALYTICS
 
 SELECT
 
-    *,
+    CONTAINER_ID,
+    SHIPMENT_ID,
+    FRUIT_TYPE,
+    ORIGIN,
+    DESTINATION,
 
-    CASE
-        WHEN SPOILAGE_SCORE >= 70 THEN 'Nearest Local Market'
-        WHEN SPOILAGE_SCORE >= 40 THEN 'Regional Distribution Center'
-        ELSE 'Primary Export Market'
-    END AS MARKET_NAME
+    TEMPERATURE,
+    HUMIDITY,
+    VIBRATION,
+    BATTERY_LEVEL,
 
-FROM SENSOR_ANALYTICS
+    ---------------------------------------------------
+    -- Risk Score
+    ---------------------------------------------------
+    (
+        CASE
+            WHEN TEMPERATURE <= 5 THEN 10
+            WHEN TEMPERATURE <= 8 THEN 20
+            ELSE 35
+        END +
 
-)
+        CASE
+            WHEN HUMIDITY <= 70 THEN 10
+            WHEN HUMIDITY <= 85 THEN 20
+            ELSE 30
+        END +
 
-SELECT
+        CASE
+            WHEN VIBRATION <= 2 THEN 5
+            WHEN VIBRATION <= 4 THEN 10
+            ELSE 15
+        END +
 
-    f.ID,
-    f.TIMESTAMP,
-    f.TEMPERATURE,
-    f.HUMIDITY,
-    f.PRESSURE,
-    f.CO2_GAS,
-    f.PM2_5,
-    f.PM10,
-    f.DAYTIME,
+        CASE
+            WHEN BATTERY_LEVEL >= 80 THEN 5
+            WHEN BATTERY_LEVEL >= 50 THEN 10
+            ELSE 20
+        END
 
-    f.SPOILAGE_SCORE,
+    ) AS RISK_SCORE,
 
-    --------------------------------------------------
+   
     -- Spoilage Risk
-    --------------------------------------------------
+    
     CASE
-        WHEN f.SPOILAGE_SCORE >= 70 THEN 'Critical'
-        WHEN f.SPOILAGE_SCORE >= 40 THEN 'Warning'
+        WHEN TEMPERATURE > 8 OR HUMIDITY > 85 THEN 'Critical'
+        WHEN TEMPERATURE > 5 OR HUMIDITY > 75 THEN 'Warning'
+        ELSE 'Safe'
+    END AS SPOILAGE_RISK,
+
+   
+    -- Time to Spoilage
+    
+    CASE
+        WHEN TEMPERATURE > 8 THEN 8
+        WHEN TEMPERATURE > 5 THEN 24
+        ELSE 72
+    END AS TIME_TO_SPOILAGE,
+
+    
+    -- Estimated Loss
+    
+    CASE
+        WHEN TEMPERATURE > 8 THEN 2500
+        WHEN TEMPERATURE > 5 THEN 1200
+        ELSE 300
+    END AS ESTIMATED_LOSS,
+
+    
+    -- Recommended Market
+    
+    CASE
+        WHEN TEMPERATURE > 8 THEN 'Nearest Local Market'
+        WHEN TEMPERATURE > 5 THEN 'Regional Distribution Center'
+        ELSE 'Primary Export Market'
+    END AS RECOMMENDED_MARKET,
+
+   
+    -- Arbitrage Profit
+    
+    CASE
+        WHEN TEMPERATURE > 8 THEN 1500
+        WHEN TEMPERATURE > 5 THEN 3200
+        ELSE 4700
+    END AS ARBITRAGE_PROFIT,
+
+    
+    -- Recommended Action
+   
+    CASE
+        WHEN TEMPERATURE > 8 THEN 'Immediate Reroute'
+        WHEN TEMPERATURE > 5 THEN 'Monitor Every Hour'
+        ELSE 'Continue Standard Route'
+    END AS RECOMMENDED_ACTION,
+
+    TIMESTAMP
+
+FROM RAW.CONTAINER_SENSOR_DATA;
+SELECT COUNT(*) FROM ANALYTICS.CONTAINER_ANALYTICS;
+
+SELECT *
+FROM ANALYTICS.CONTAINER_ANALYTICS
+LIMIT 10;
+
+CREATE OR REPLACE TASK UPDATE_ANALYTICS
+WAREHOUSE = COMPUTE_WH
+SCHEDULE = '1 MINUTE'
+AS
+
+INSERT INTO ANALYTICS.CONTAINER_ANALYTICS
+
+SELECT
+    CONTAINER_ID,
+    SHIPMENT_ID,
+    FRUIT_TYPE,
+    ORIGIN,
+    DESTINATION,
+    TEMPERATURE,
+    HUMIDITY,
+    VIBRATION,
+    BATTERY_LEVEL,
+
+    (
+        CASE
+            WHEN TEMPERATURE <= 5 THEN 10
+            WHEN TEMPERATURE <= 8 THEN 20
+            ELSE 35
+        END +
+
+        CASE
+            WHEN HUMIDITY <= 70 THEN 10
+            WHEN HUMIDITY <= 85 THEN 20
+            ELSE 30
+        END +
+
+        CASE
+            WHEN VIBRATION <= 2 THEN 5
+            WHEN VIBRATION <= 4 THEN 10
+            ELSE 15
+        END +
+
+        CASE
+            WHEN BATTERY_LEVEL >= 80 THEN 5
+            WHEN BATTERY_LEVEL >= 50 THEN 10
+            ELSE 20
+        END
+    ),
+
+    CASE
+        WHEN TEMPERATURE > 8 OR HUMIDITY > 85 THEN 'Critical'
+        WHEN TEMPERATURE > 5 OR HUMIDITY > 75 THEN 'Warning'
         ELSE 'Safe'
     END,
 
-    --------------------------------------------------
-    --  Hours remaining
-    --------------------------------------------------
     CASE
-        WHEN f.SPOILAGE_SCORE <= 30 THEN 72
-        WHEN f.SPOILAGE_SCORE <= 50 THEN 48
-        WHEN f.SPOILAGE_SCORE <= 70 THEN 24
-        ELSE 8
+        WHEN TEMPERATURE > 8 THEN 8
+        WHEN TEMPERATURE > 5 THEN 24
+        ELSE 72
     END,
 
-    --------------------------------------------------
-    --  Estimated Loss
-    --------------------------------------------------
     CASE
-        WHEN f.SPOILAGE_SCORE <= 30 THEN 250
-        WHEN f.SPOILAGE_SCORE <= 50 THEN 750
-        WHEN f.SPOILAGE_SCORE <= 70 THEN 1500
-        ELSE 2500
+        WHEN TEMPERATURE > 8 THEN 2500
+        WHEN TEMPERATURE > 5 THEN 1200
+        ELSE 300
     END,
 
-    --------------------------------------------------
-    --  Arbitrage Profit from MARKET_PRICING table
-    --------------------------------------------------
-    (
-        m.MARKET_VALUE -
-
-        CASE
-            WHEN f.SPOILAGE_SCORE <= 30 THEN 250
-            WHEN f.SPOILAGE_SCORE <= 50 THEN 750
-            WHEN f.SPOILAGE_SCORE <= 70 THEN 1500
-            ELSE 2500
-        END
-
-    ) AS ARBITRAGE_PROFIT,
-
-    --------------------------------------------------
-    --  Uses lookup table instead of hardcoding
-    --------------------------------------------------
-    f.MARKET_NAME,
-
-    --------------------------------------------------
-    --  Better Action Messages
-    --------------------------------------------------
     CASE
-        WHEN f.SPOILAGE_SCORE >= 70 THEN 'Immediate Reroute & Priority Delivery'
-        WHEN f.SPOILAGE_SCORE >= 40 THEN 'Monitor Every Hour'
+        WHEN TEMPERATURE > 8 THEN 'Nearest Local Market'
+        WHEN TEMPERATURE > 5 THEN 'Regional Distribution Center'
+        ELSE 'Primary Export Market'
+    END,
+
+    CASE
+        WHEN TEMPERATURE > 8 THEN 1500
+        WHEN TEMPERATURE > 5 THEN 3200
+        ELSE 4700
+    END,
+
+    CASE
+        WHEN TEMPERATURE > 8 THEN 'Immediate Reroute'
+        WHEN TEMPERATURE > 5 THEN 'Monitor Every Hour'
         ELSE 'Continue Standard Route'
-    END
+    END,
 
-FROM FINAL_ANALYTICS f
+    TIMESTAMP
 
---------------------------------------------------
---  Join with Market Pricing table
---------------------------------------------------
-JOIN MARKET_PRICING m
-ON f.MARKET_NAME = m.MARKET_NAME;
+FROM RAW.CONTAINER_SENSOR_DATA r
 
-SELECT * FROM CONTAINER_ANALYTICS;
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM ANALYTICS.CONTAINER_ANALYTICS a
+    WHERE a.CONTAINER_ID = r.CONTAINER_ID
+      AND a.TIMESTAMP = r.TIMESTAMP
+);
 
+ALTER TASK UPDATE_ANALYTICS RESUME;
+
+SHOW TASKS;
+
+
+
+SELECT COUNT(*)
+FROM ANALYTICS.CONTAINER_ANALYTICS;
+
+SELECT *
+FROM TABLE(INFORMATION_SCHEMA.TASK_HISTORY(
+    TASK_NAME => 'UPDATE_ANALYTICS'
+));
+
+SELECT
+    SCHEDULED_TIME,
+    STATE,
+    QUERY_ID,
+    ERROR_MESSAGE
+FROM TABLE(
+    INFORMATION_SCHEMA.TASK_HISTORY(
+        TASK_NAME => 'UPDATE_ANALYTICS'
+    )
+)
+ORDER BY SCHEDULED_TIME DESC;
+
+SELECT COUNT(*) FROM RAW.CONTAINER_SENSOR_DATA;
+SELECT COUNT(*)
+FROM ANALYTICS.CONTAINER_ANALYTICS;
+--
+
+
+--
+SHOW TASKS LIKE 'UPDATE_ANALYTICS';
+
+ALTER TASK UPDATE_ANALYTICS RESUME;
