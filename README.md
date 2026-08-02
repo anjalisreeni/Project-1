@@ -358,7 +358,11 @@ The work presented in this branch represents **my individual contributions**, in
 - Three-Page Power BI Dashboard
 - Analytics Transformation 
 
-## Connect with Me
+## 👤 Author
+
+**Sayam Stuti Shuvadarsini**
+## Connect with me
 
 - 💼 LinkedIn: www.linkedin.com/in/sayam-stuti-shuvadarsini
-- 💻 GitHub: https://github.com/sayamstuti
+- 💻 GitHub: https://github.com/sayamstuti 
+- 📧 Email: sayamstuti594@gmail.com 
