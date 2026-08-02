@@ -1,10 +1,12 @@
-
-
 USE DATABASE ATMOSYNC_DB;
 
 CREATE SCHEMA IF NOT EXISTS ANALYTICS;
 
 USE SCHEMA ANALYTICS;
+
+-- =====================================================
+-- Create Analytics Table
+-- =====================================================
 
 CREATE OR REPLACE TABLE CONTAINER_ANALYTICS (
 
@@ -32,6 +34,10 @@ CREATE OR REPLACE TABLE CONTAINER_ANALYTICS (
     TIMESTAMP TIMESTAMP_NTZ
 );
 
+-- =====================================================
+-- Initial Analytics Load
+-- =====================================================
+
 INSERT INTO ANALYTICS.CONTAINER_ANALYTICS
 
 SELECT
@@ -47,9 +53,6 @@ SELECT
     VIBRATION,
     BATTERY_LEVEL,
 
-    ---------------------------------------------------
-    -- Risk Score
-    ---------------------------------------------------
     (
         CASE
             WHEN TEMPERATURE <= 5 THEN 10
@@ -77,54 +80,36 @@ SELECT
 
     ) AS RISK_SCORE,
 
-   
-    -- Spoilage Risk
-    
     CASE
         WHEN TEMPERATURE > 8 OR HUMIDITY > 85 THEN 'Critical'
         WHEN TEMPERATURE > 5 OR HUMIDITY > 75 THEN 'Warning'
         ELSE 'Safe'
     END AS SPOILAGE_RISK,
 
-   
-    -- Time to Spoilage
-    
     CASE
         WHEN TEMPERATURE > 8 THEN 8
         WHEN TEMPERATURE > 5 THEN 24
         ELSE 72
     END AS TIME_TO_SPOILAGE,
 
-    
-    -- Estimated Loss
-    
     CASE
         WHEN TEMPERATURE > 8 THEN 2500
         WHEN TEMPERATURE > 5 THEN 1200
         ELSE 300
     END AS ESTIMATED_LOSS,
 
-    
-    -- Recommended Market
-    
     CASE
         WHEN TEMPERATURE > 8 THEN 'Nearest Local Market'
         WHEN TEMPERATURE > 5 THEN 'Regional Distribution Center'
         ELSE 'Primary Export Market'
     END AS RECOMMENDED_MARKET,
 
-   
-    -- Arbitrage Profit
-    
     CASE
         WHEN TEMPERATURE > 8 THEN 1500
         WHEN TEMPERATURE > 5 THEN 3200
         ELSE 4700
     END AS ARBITRAGE_PROFIT,
 
-    
-    -- Recommended Action
-   
     CASE
         WHEN TEMPERATURE > 8 THEN 'Immediate Reroute'
         WHEN TEMPERATURE > 5 THEN 'Monitor Every Hour'
@@ -134,11 +119,10 @@ SELECT
     TIMESTAMP
 
 FROM RAW.CONTAINER_SENSOR_DATA;
-SELECT COUNT(*) FROM ANALYTICS.CONTAINER_ANALYTICS;
 
-SELECT *
-FROM ANALYTICS.CONTAINER_ANALYTICS
-LIMIT 10;
+-- =====================================================
+-- Automated Analytics Update Task
+-- =====================================================
 
 CREATE OR REPLACE TASK UPDATE_ANALYTICS
 WAREHOUSE = COMPUTE_WH
@@ -148,11 +132,13 @@ AS
 INSERT INTO ANALYTICS.CONTAINER_ANALYTICS
 
 SELECT
+
     CONTAINER_ID,
     SHIPMENT_ID,
     FRUIT_TYPE,
     ORIGIN,
     DESTINATION,
+
     TEMPERATURE,
     HUMIDITY,
     VIBRATION,
@@ -231,39 +217,6 @@ WHERE NOT EXISTS (
       AND a.TIMESTAMP = r.TIMESTAMP
 );
 
-ALTER TASK UPDATE_ANALYTICS RESUME;
-
-SHOW TASKS;
-
-
-
-SELECT COUNT(*)
-FROM ANALYTICS.CONTAINER_ANALYTICS;
-
-SELECT *
-FROM TABLE(INFORMATION_SCHEMA.TASK_HISTORY(
-    TASK_NAME => 'UPDATE_ANALYTICS'
-));
-
-SELECT
-    SCHEDULED_TIME,
-    STATE,
-    QUERY_ID,
-    ERROR_MESSAGE
-FROM TABLE(
-    INFORMATION_SCHEMA.TASK_HISTORY(
-        TASK_NAME => 'UPDATE_ANALYTICS'
-    )
-)
-ORDER BY SCHEDULED_TIME DESC;
-
-SELECT COUNT(*) FROM RAW.CONTAINER_SENSOR_DATA;
-SELECT COUNT(*)
-FROM ANALYTICS.CONTAINER_ANALYTICS;
---
-
-
---
-SHOW TASKS LIKE 'UPDATE_ANALYTICS';
+-- Start the automated task
 
 ALTER TASK UPDATE_ANALYTICS RESUME;
