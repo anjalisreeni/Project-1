@@ -1,15 +1,15 @@
 
-# 🌦️ AtmoSync – Micro-Climate Arbitrage Analytics
+#  AtmoSync – Micro-Climate Arbitrage Analytics
 
 > A real-time supply chain analytics platform that monitors refrigerated agricultural shipments using IoT sensor data, enabling early spoilage detection and smarter logistics decisions.
 
 ---
 
-# 👨‍💻 My Contributions
+#  My Contributions
 
 This branch contains my individual contributions to the AtmoSync project.
 
-## ✅ 1. Repository Structure
+##  1. Repository Structure
 
 - Created the initial repository structure
 - Organized folders for:
@@ -28,7 +28,7 @@ This branch contains my individual contributions to the AtmoSync project.
 
 ---
 
-# 📡 2. Python IoT Sensor Simulator
+#  2. Python IoT Sensor Simulator
 
 Designed and developed a Python-based IoT simulator that generates realistic refrigerated container sensor data.
 
@@ -71,7 +71,7 @@ The simulator mimics real refrigerated container telemetry for analytics and das
 
 ---
 
-# 📊 3. Exploratory Data Analysis (EDA)
+#  3. Exploratory Data Analysis (EDA)
 
 Performed comprehensive exploratory analysis on the generated IoT dataset.
 
@@ -88,7 +88,7 @@ These analyses helped identify shipment patterns and validate generated sensor d
 
 ---
 
-# ⚙️ 4. Feature Engineering
+#  4. Feature Engineering
 
 Created additional business-oriented features to improve analytics.
 
@@ -112,7 +112,7 @@ sensor_data_feature_engineered.csv
 
 ---
 
-# 🗄️ 5. SQL Analytics
+#  5. SQL Analytics
 
 Designed SQL queries to extract operational insights.
 
@@ -138,7 +138,7 @@ Designed SQL queries to extract operational insights.
 
 ---
 
-# 📈 6. Power BI Dashboard
+#  6. Power BI Dashboard
 
 Designed an interactive two-page dashboard to monitor container health and shipment performance.
 
@@ -146,7 +146,7 @@ Designed an interactive two-page dashboard to monitor container health and shipm
 
 
 
-## 📄 Page 1 – Operational Monitoring
+##  Page 1 – Operational Monitoring
 
 Features
 
@@ -171,7 +171,7 @@ Features
 
 ---
 
-## 📄 Page 2 – Historical & Logistics Analysis
+##  Page 2 – Historical & Logistics Analysis
 
 Features
 
@@ -188,7 +188,7 @@ Features
 
 ---
 
-## 📄 Page 3 – Live Risk & Business Analytics
+##  Page 3 – Live Risk & Business Analytics
 
  KPI Cards
 
@@ -225,11 +225,11 @@ The dashboard updates with newly streamed sensor records after refreshing the re
 
 ---
 
-# 📊 7. Snowflake Data Pipeline & Analytics
+#  7. Snowflake Data Pipeline & Analytics
 
 Developed a Snowflake-based data pipeline to transform raw IoT sensor data into business-ready analytics for refrigerated supply chain monitoring.
 
-## 📄 create_raw_table.sql
+##  create_raw_table.sql
 
 Created the RAW data layer for ingesting live sensor data.
 
@@ -248,7 +248,7 @@ Created the RAW data layer for ingesting live sensor data.
 
 ---
 
-## 📄 analytics_transformation.sql
+##  analytics_transformation.sql
 
 Developed the analytics layer to generate operational insights from raw sensor data.
 
@@ -278,7 +278,7 @@ Developed the analytics layer to generate operational insights from raw sensor d
 
 ---
 
-# 🌐 8. Real-Time Snowflake Streaming
+#  8. Real-Time Snowflake Streaming
 
 Designed a real-time streaming pipeline using Python and Snowflake.
 
@@ -290,7 +290,7 @@ Designed a real-time streaming pipeline using Python and Snowflake.
 - Automatically updated the Analytics layer using a scheduled Snowflake Task
 - Enabled near real-time analytics for Power BI dashboard refresh
 
-# 📁 Project Structure
+#  Project Structure
 
 ```text
 AtmoSync/
@@ -342,7 +342,7 @@ AtmoSync/
 
 
 
-# 🙌 Acknowledgement
+#  Acknowledgement
 
 This project was developed as part of the **Infotact AtmoSync** team project.
 
@@ -358,11 +358,11 @@ The work presented in this branch represents **my individual contributions**, in
 - Three-Page Power BI Dashboard
 - Analytics Transformation 
 
-## 👤 Author
+##  Author
 
 **Sayam Stuti Shuvadarsini**
 ## Connect with me
 
-- 💼 LinkedIn: www.linkedin.com/in/sayam-stuti-shuvadarsini
-- 💻 GitHub: https://github.com/sayamstuti 
-- 📧 Email: sayamstuti594@gmail.com 
+-  LinkedIn: www.linkedin.com/in/sayam-stuti-shuvadarsini
+-  GitHub: https://github.com/sayamstuti 
+-  Email: sayamstuti594@gmail.com 
