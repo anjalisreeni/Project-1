@@ -1,25 +1,25 @@
 
-# 🌍 AtmoSync – Micro-Climate Arbitrage Analytics
+#  AtmoSync – Micro-Climate Arbitrage Analytics
 
 > A real-time IoT-driven analytics platform that monitors shipping container conditions, predicts spoilage risk, and enables data-driven rerouting decisions using streaming data engineering and cloud analytics.
 
 ---
-## 📑 Table of Contents
+##  Table of Contents
 
-- [📌 Problem Statement](#-problem-statement)
-- [💡 Use Case](#-use-case)
-- [🚀 Project Architecture](#-project-architecture)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [✨ Key Features](#-key-features)
-- [👥 Team Members & Contributions](#-team-members--contributions)
-- [📊 Dashboard Overview](#-dashboard-overview)
-- [🔄 Workflow](#-workflow)
-- [🎯 Expected Outcomes](#-expected-outcomes)
-- [🚀 Future Enhancements](#-future-enhancements)
-- [📄 License](#-license)
+- [ Problem Statement](#-problem-statement)
+- [ Use Case](#-use-case)
+- [ Project Architecture](#-project-architecture)
+- [ Tech Stack](#️-tech-stack)
+- [ Project Structure](#-project-structure)
+- [ Key Features](#-key-features)
+- [ Team Members & Contributions](#-team-members--contributions)
+- [ Dashboard Overview](#-dashboard-overview)
+- [ Workflow](#-workflow)
+- [ Expected Outcomes](#-expected-outcomes)
+- [ Future Enhancements](#-future-enhancements)
+- [ License](#-license)
 
-## 📌 Problem Statement
+##  Problem Statement
 
 Traditional supply chain analytics rely on fixed transit schedules and macro-level weather forecasts. They fail to capture **real-time, hyper-local micro-climate changes** occurring inside shipping containers. Sudden fluctuations in temperature, humidity, or air quality can rapidly degrade perishable commodities before they reach the market, leading to significant financial losses.
 
@@ -27,7 +27,7 @@ Traditional supply chain analytics rely on fixed transit schedules and macro-lev
 
 ---
 
-## 💡 Use Case
+##  Use Case
 
 A commodities trader at **Infotact** monitors the AtmoSync dashboard while tracking multiple shipments.
 
@@ -39,7 +39,7 @@ This enables organizations to reduce wastage, improve operational efficiency, an
 
 ---
 
-# 🚀 Project Architecture
+#  Project Architecture
 
 ```
 IoT Sensor Simulator
@@ -63,26 +63,26 @@ IoT Sensor Simulator
 
 ---
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 - Python
-- Apache Kafka
+- Pandas & NumPy
+- Matplotlib
 - Snowflake
 - SQL
-- dbt
-- Apache Superset
 - Power BI
+- Apache Kafka
 - Git & GitHub
 
 ---
 
-# 📂 Project Structure
+#  Project Structure
 
-```
+```text
 Project-1
 │
 ├── Dashboard
-│   └── dashboard.pbix
+│   └── Atmosync_dashboard.pbix
 │
 ├── Data
 │   ├── sensor_data.csv
@@ -95,62 +95,80 @@ Project-1
 │   └── project_overview.md
 │
 ├── Images
+│   ├── page_1_dashboard.jpg
+│   ├── page_2_dashboard.jpg
+│   └── page_3_dashboard.jpg
 │
 ├── Kafka
 │   ├── producer.py
 │   ├── consumer.py
 │   └── risk_utils.py
 │
+├── Notebooks
+│   ├── EDA_IoT_Simulator.ipynb
+│   └── Feature_Engineering.ipynb
+│
 ├── Simulator
 │   ├── iot_simulator.py
 │   └── snowflake_connection.py
 │
 ├── SQL
+│   ├── analytics_transformation.sql
+│   ├── create_raw_table.sql
+│   ├── queries_dashboard.sql
 │   └── setup_snowflake.sql
 │
-├── Notebooks
-│   ├── EDA_IoT_Simulator.ipynb
-│   └── Feature_Engineering.ipynb
+├── Stream
+│   └── stream_to_snowflake.py
 │
 ├── config.py
 ├── requirements.txt
 └── README.md
+
 ```
 
 ---
 
-# ✨ Key Features
+#  Key Features
 
 - Real-time IoT sensor simulation
-- Kafka-based streaming data pipeline
-- Cloud data storage using Snowflake
-- SQL-based warehouse initialization
-- Feature engineering and exploratory data analysis
-- Risk assessment using sensor analytics
-- Interactive dashboard for operational monitoring
-- Scalable and modular data engineering workflow
+- Live data streaming to Snowflake
+- Automated analytics transformation using Snowflake Tasks
+- Spoilage risk assessment and business KPI generation
+- SQL-based data analytics and reporting
+- Interactive three-page Power BI dashboard
+- Estimated loss and arbitrage profit analysis
+- Modular data engineering pipeline
 
 ---
 
-# 👥 Team Members & Contributions
+#  Team Members & Contributions
 
-## 👩 Sayam Stuti Shuvadarsini
+##  Sayam Stuti Shuvadarsini
 
-**Data Analytics, IoT Simulation & Dashboard Develpoment**
+**Data Analytics, Snowflake Pipeline, IoT Simulation & Dashboard Development**
 
 - Developed the IoT Sensor Simulator
 - Generated mock environmental sensor data
 - Performed Exploratory Data Analysis (EDA)
 - Implemented Feature Engineering
-- Designed and developed the Power BI Dashboard
+- Built SQL analytics queries
+- Developed Snowflake analytics transformation pipeline
+- Implemented real-time data streaming into Snowflake
+- Designed and developed a three-page interactive Power BI Dashboard
 - Created project documentation
 - Organized the repository structure and project integration
 
 **Files**
+
 - `Simulator/iot_simulator.py`
-- `Notebooks/EDA_IoT_simulator.ipynb`
+- `Stream/stream_to_snowflake.py`
+- `SQL/create_raw_table.sql`
+- `SQL/analytics_transformation.sql`
+- `SQL/queries_dashboard.sql`
+- `Dashboard/Atmosync_dashboard.pbix`
+- `Notebooks/EDA_IoT_Simulator.ipynb`
 - `Notebooks/Feature_Engineering.ipynb`
-- `Dashboard/dashboard.pbix`
 - `Data/sensor_data.csv`
 - `Data/sensor_data_feature_engineered.csv`
 - `Docs/dashboard_guide.md`
@@ -159,10 +177,11 @@ Project-1
 - `Docs/project_overview.md`
 - `Images/page_1_dashboard.jpg`
 - `Images/page_2_dashboard.jpg`
+- `Images/page_3_dashboard.jpg`
 
 ---
 
-## 👩 Jiya Pendhari
+##  Jiya Pendhari
 
 **Snowflake Integration & Live Data Pipeline**
 
@@ -182,7 +201,7 @@ Project-1
 
 ---
 
-## 👨 Neel
+##  Neel
 
 **Kafka Streaming Pipeline**
 
@@ -197,7 +216,7 @@ Project-1
 
 ---
 
-## 👩 Anjali Sreeni
+##  Anjali Sreeni
 
 **Project Lead & Repository Management**
 
@@ -208,33 +227,24 @@ Project-1
 ---
 
 
-# 📊 Dashboard Overview
+#  Dashboard Overview
 
-The Power BI dashboard provides a comprehensive view of container sensor data by monitoring environmental conditions and operational metrics.
+The project includes a **three-page interactive Power BI dashboard** for monitoring refrigerated container health and supporting logistics decisions.
 
-### Dashboard Features
+### Features
 
-- 📌 Total Sensor Readings
-- 📌 Total Containers Monitored
-- 📌 Average Temperature
-- 📌 Average Humidity
-- 📌 Average Pressure
-- 📌 Average CO₂ Gas Concentration
-- 📌 Average PM2.5 Level
-- 📌 Average PM10 Level
-- 📈 Temperature Trend Over Time
-- 📊 Shipment Distribution by Fruit Type
-- 📦 Container Status Distribution
-- 🌡️ Temperature Distribution
-- 💧 Humidity Distribution
-- 📉 Sensor Data Trends
-- 🎛 Interactive Filters for Container ID, Date and Daytime
-
-The dashboard enables users to monitor container health, identify abnormal environmental conditions, analyze sensor trends, and make informed supply chain decisions using real-time insights.
+- KPI Cards
+- Live Temperature Trend
+- Shipment & Fruit Analytics
+- Spoilage Risk Distribution
+- Estimated Loss & Arbitrage Profit
+- Destination-wise Profit Analysis
+- Live Container Alerts
+- Interactive Filters
 
 ---
 
-# 🔄 Workflow
+#  Workflow
 
 ```
 IoT Simulator
@@ -252,38 +262,27 @@ Kafka Consumer
 Snowflake
       │
       ▼
-SQL / dbt Transformations
+SQL Transformations
       │
       ▼
-Apache Superset / Power BI Dashboard
+ Power BI Dashboard
 ```
 
 ---
 
-# 🎯 Expected Outcomes
+#  Expected Outcomes
 
-- Build a scalable real-time streaming analytics pipeline.
-- Monitor container conditions using IoT telemetry.
-- Store and manage streaming data in Snowflake.
-- Perform data transformation and feature engineering.
-- Generate actionable insights through interactive dashboards.
-- Support business decisions using Spoilage Arbitrage analytics.
+- Real-time monitoring of refrigerated container conditions.
+- Early detection of spoilage risks using IoT sensor data.
+- Support data-driven logistics and rerouting decisions.
+- Deliver interactive analytics through Power BI dashboards.
+- Demonstrate an end-to-end data engineering and analytics pipeline.
+---
+
 
 ---
 
-# 🚀 Future Enhancements
-
-- Complete dbt transformation models
-- Deploy Apache Superset for live dashboards
-- Automated pipeline orchestration
-- Slack and Email alert system
-- Machine Learning based spoilage prediction
-- Route optimization recommendations
-- Cloud deployment using Docker and Kubernetes
-
----
-
-# 📄 License
+#  License
 
 This project was developed as part of the **Infotact Data Engineering & Analytics Internship Program**.
 
