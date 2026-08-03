@@ -20,4 +20,14 @@ The Power BI dashboard provides operational insights into refrigerated container
 - Environmental Summary
 - Operational Insights
 
+## Page 3 – Live Risk & Business Analytics
+
+- KPI Cards (Active Containers, Average Risk Score, Estimated Loss, Arbitrage Profit)
+- Live Temperature Trend
+- Spoilage Risk Distribution
+- Estimated Loss by Fruit Type
+- Arbitrage Profit by Destination
+- Live Container Monitoring Table
+- Interactive Filters
+
 The dashboard enables users to monitor shipment conditions, identify high-risk containers, and analyze logistics performance through interactive visualizations.
