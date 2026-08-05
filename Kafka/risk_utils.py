@@ -1,13 +1,5 @@
-"""
-risk_utils.py
-
-Shared logic for the container cold-chain monitoring pipeline.
-Used by both producer.py (Kafka streaming) and realtime_simulator
-(notebook/offline testing) so that drift + risk scoring never
-drift out of sync between the two.
-"""
-
 import random
+from alert import send_email_alert
 
 
 def apply_drift(sensor_data: dict) -> dict:
@@ -41,6 +33,13 @@ def calculate_risk(sensor_data: dict) -> dict:
 
     if risk_score >= 70:
         sensor_data["alert_status"] = "Critical"
+        
+        # --- NEW ALERT CALLER ---
+        container_id = sensor_data.get("container_id", "Unknown")
+        alert_msg = f"Critical Alert: Container {container_id} has reached a risk score of {risk_score}."
+        send_email_alert(subject=f"Critical Risk Threshold Breached - Container {container_id}", message=alert_msg)
+        # ------------------------
+        
     elif risk_score >= 40:
         sensor_data["alert_status"] = "Warning"
     else:
